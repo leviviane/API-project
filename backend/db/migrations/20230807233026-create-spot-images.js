@@ -1,5 +1,11 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('SpotImages', {
@@ -12,7 +18,7 @@ module.exports = {
       spotId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Spots '},
+        references: { model: 'Spots' },
         onDelete: 'CASCADE'
       },
       url: {
@@ -33,9 +39,10 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('SpotImages');
+    options.tableName = 'SpotImages';
+    return queryInterface.dropTable(options);
   }
 };

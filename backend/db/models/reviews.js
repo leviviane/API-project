@@ -2,7 +2,7 @@
 const {
   Model
 } = require('sequelize');
-// const spotimages = require('./spotimages'); 
+// const spotimages = require('./spotimages');
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
     /**
@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId'
       })
       Review.hasMany(models.ReviewImage, {
-        foreignKey: 'reviewId'
+        foreignKey: 'reviewId',
+        onDelete: 'CASCADE',
+        hooks: true,
       })
     }
   }

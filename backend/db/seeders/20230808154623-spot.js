@@ -12,7 +12,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await Spot.bulkCreate([
       {
-        ownerId: 111,
+        ownerId: 1,
         address: '123 Enhypen Lane',
         city: 'San Jose',
         state: 'CA',
@@ -21,10 +21,10 @@ module.exports = {
         lng: 200.90,
         name: 'Enhahouse',
         description: 'House by the beach with four bedrooms and two baths',
-        price: 500.00
+        price: 500
       },
       {
-        ownerId: 222,
+        ownerId: 2,
         address: '456 Apple Circle',
         city: 'Milpitas',
         state: 'CA',
@@ -33,10 +33,10 @@ module.exports = {
         lng: 300.90,
         name: 'City view house',
         description: 'Downtown city view with one bedroom and one bath',
-        price: 350.00
+        price: 350
       },
       {
-        ownerId: 333,
+        ownerId: 3,
         address: '789 Hybe Avenue',
         city: 'Las Vegas',
         state: 'NV',
@@ -44,10 +44,9 @@ module.exports = {
         lat: 450.90,
         lng: 902.90,
         name: 'Las Vegas Strip Condo',
-        description: 'Condo on directly on the strip with a pool',
-        price: 1000.00
+        description: 'Condo directly on the strip with a pool',
+        price: 1000
       }
-
     ])
     /**
      * Add seed commands here.
@@ -64,7 +63,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      ownerId: { [Op.in]:[111, 222, 333] }
+      ownerId: { [Op.in]:[1, 2, 3] }
     }, {})
     /**
      * Add commands to revert seed here.

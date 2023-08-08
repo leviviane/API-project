@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       ReviewImage.belongsTo(models.Review, {
         foreignKey: 'reviewId'
       })
-
     }
   }
   ReviewImage.init({
