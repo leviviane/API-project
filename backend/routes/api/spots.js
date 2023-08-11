@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
-const { Spot, Review, SpotImage, User, ReviewImage, Bookings } = require('../../db/models');
+const { Spot, Review, SpotImage, User, ReviewImage, Booking } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 
 const validateCreateSpot = [
@@ -39,8 +39,6 @@ const validateCreateSpot = [
       .withMessage('Price per day is required'),
       handleValidationErrors
   ];
-
-
 
 //Get all spots
 router.get('/', async (req, res) => {
@@ -429,10 +427,67 @@ router.get('/:spotId/reviews', async (req, res) => {
 // });
 
 
-//Get all bookings for a spot based on the spots id
+// Get all bookings for a spot based on the spots id
 router.get('/:spotId/bookings', requireAuth, async(req, res) => {
-    
-} )
+    let spotId = req.params.spotId;
+    let spot = await Spot.findOne({
+        where: { id: spotId }
+    });
+
+    const bookings = await Booking.findAll({
+        where: {
+            spotId
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+        ]
+    })
+    if (!bookings) {
+        return res.status(404).json({ message: "Spot couldn't be found"})
+    }
+    let bookingsList = [];
+    bookings.forEach(booking => {
+      bookingsList.push(booking.toJSON());
+    });
+    res.json({ Bookings: bookings });
+  });
+
+//Create a booking from a spot based on the spots id //!! go back
+router.post('/:spotId/bookings', requireAuth, async(req, res) => {
+    const spot = await Booking.findByPk(req.params.spotId)
+    const { startDate, endDate } = req.body;
+
+    if (spot) {
+        const createdBooking = await Booking.findOne({
+            where: {
+                userId: req.user.id,
+                spotId: spot.id
+            }
+        })
+        if (!createdBooking) {
+            const createBooking = await Booking.create({
+                spotId: spot.id,
+                userId: req.user.id,
+                startDate,
+                endDate
+            })
+            res.status(200);
+            return res.json(createBooking)
+        } else {
+            res.status(403).json({  message: "Sorry, this spot is already booked for the specified dates",
+            errors: {
+              startDate: "Start date conflicts with an existing booking",
+              endDate: "End date conflicts with an existing booking" }})
+        }
+    } else {
+        res.status(404).json({ message: "Spot couldn't be found "})
+    }
+})
+
+
 
 
 

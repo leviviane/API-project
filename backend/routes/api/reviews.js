@@ -102,7 +102,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 //edit a review //!! check error message
 router.put('/:reviewsId', validateReview, requireAuth, async (req, res)=> {
     const editReview = await Review.findByPk(req.params.reviewsId);
-    const user = await User.findByPk(req.user.id)
+    const user = await User.findByPk(req.user.id);
 
     if (editReview) {
         if (editReview.userId === user.id) {
@@ -121,7 +121,7 @@ router.put('/:reviewsId', validateReview, requireAuth, async (req, res)=> {
 
 
 //delete a review
-router.delete('/:reviewId', requireAuth, async (req, res) => {
+router.delete('/:reviewId', requireAuth, async(req, res) => {
     const reviewId = req.params.reviewId
 
     let review = await Review.findByPk(reviewId)
