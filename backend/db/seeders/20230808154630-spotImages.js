@@ -24,7 +24,7 @@ module.exports = {
       {
         spotId: 3,
         preview: false,
-        url: 'www.lasvegascondo'
+        url: 'www.lasvegascondo',
       }
     ])
     /**

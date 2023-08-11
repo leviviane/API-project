@@ -40,8 +40,65 @@ const validateCreateSpot = [
       handleValidationErrors
   ];
 
+  const validateQuery = [
+    check("page")
+    .optional()
+      .isInt({ min: 1 })
+      .withMessage("Page must be greater than or equal to 1"),
+    check("size")
+    .optional()
+      .isInt({ min: 1 })
+      .withMessage("Size must be greater than or equal to 1"),
+    check("maxLat")
+      .optional()
+      .isNumeric()
+      .isInt({ min: -1000, max: 1000 })
+      .withMessage("Maximum latitude is invalid"),
+    check("minLat")
+      .optional()
+      .isNumeric()
+      .isInt({ min: -1000, max: 1000 })
+      .withMessage("Minimum latitude is invalid"),
+    check("maxLng")
+      .optional()
+      .isNumeric()
+      .isInt({ min: -2000, max: 2000 })
+      .withMessage("Maximum longitude is invalid"),
+    check("minLat")
+      .optional()
+      .isNumeric()
+      .isInt({ min: -2000, max: 2000 })
+      .withMessage("Minimum longitude is invalid"),
+    check("minPrice")
+      .optional()
+      .isInt({ min: 0 })
+      .isNumeric()
+      .withMessage("Minimum price must be greater than or equal to 0"),
+    check("maxPrice")
+      .optional()
+      .isInt({ min: 0 })
+      .isNumeric()
+      .withMessage("Maximum price must be greater than or equal to 0"),
+    handleValidationErrors,
+  ];
+
+
 //Get all spots
-router.get('/', async (req, res) => {
+router.get('/', validateQuery, async (req, res) => {
+
+        //Add query filters to get all spots
+        let { page, size } = req.query;
+        page = parseInt(page)
+        size = parseInt(size)
+
+        if (!page || isNaN(page) || page > 10) page = 1
+        if (!size || isNaN(size) || size > 20) size = 20
+
+        let pagination = {
+            limit: size,
+            offset: size * ( page - 1)
+        }
+
     const spots = await Spot.findAll({
         include: [
             {
@@ -50,7 +107,7 @@ router.get('/', async (req, res) => {
             {
                 model: SpotImage
             }
-        ]
+        ], ...pagination
     });
     // spots.toJSON()
     // console.log(spots)
@@ -69,8 +126,6 @@ router.get('/', async (req, res) => {
         delete spot.Reviews
     });
 
-
-
     spotsList.forEach(spot => {
         spot.SpotImages.forEach(image => {
             if (image.preview === true) {
@@ -82,10 +137,17 @@ router.get('/', async (req, res) => {
             spot.previewImage = 'no preview image found'
         }
         delete spot.SpotImages
-    });
-    console.log(spotsList)
 
-    res.json(spotsList)
+    });
+    const validateObj = {
+        Spots: spotsList,
+        page: page,
+        size: size
+    };
+    // res.json(validateObj)
+    // console.log(spotsList)
+
+    return res.json(validateObj)
 });
 
 //get all spots owned by the current user
