@@ -47,10 +47,10 @@ router.put('/:bookingsId', requireAuth, async(req, res) => {
                 endDate
             })
         } else {
-            res.status(403).json({ message: "Booking must belong to current user" })
+            return res.status(403).json({ message: "Booking must belong to current user" })
         }
     } else {
-        res.status(404).json({ message: "Booking couldn't be found"})
+        return res.status(404).json({ message: "Booking couldn't be found"})
     }
     res.json(editBooking)
 })
