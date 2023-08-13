@@ -490,8 +490,43 @@ router.get('/:spotId/reviews', async (req, res) => {
 
 
 // Get all bookings for a spot based on the spots id
+// router.get('/:spotId/bookings', requireAuth, async(req, res) => {
+//     let spotId = req.params.spotId;
+//     let user = await User.findByPk(req.user.id)
+//     let spot = await Spot.findOne({
+//         where: { id: spotId }
+//     });
+//     if (user.id === spot.ownerId) {
+//         const bookings = await Booking.findAll({
+//             where: {
+//                 spotId
+//             },
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: ['id', 'firstName', 'lastName']
+//                 }
+//             ]
+//         });
+
+//         let bookingsList = [];
+//         bookings.forEach((booking) => {
+//             bookingsList.push(booking.toJSON());
+//     })   if (!bookings) {
+//          return res.status(404).json({ message: "Spot couldn't be found"})
+//         }
+
+// } else {
+//     res.status(403).json({ message: "Spot must belong to current user"})
+// }
+//     res.json({ Bookings: bookings })
+// }) //!!
+
+
+
 router.get('/:spotId/bookings', requireAuth, async(req, res) => {
     let spotId = req.params.spotId;
+    let user = await User.findByPk(req.user.id)
     let spot = await Spot.findOne({
         where: { id: spotId }
     });
@@ -507,15 +542,25 @@ router.get('/:spotId/bookings', requireAuth, async(req, res) => {
             }
         ]
     })
-    if (!bookings) {
+    if (!spot) {
         return res.status(404).json({ message: "Spot couldn't be found"})
     }
-    let bookingsList = [];
-    bookings.forEach(booking => {
-      bookingsList.push(booking.toJSON());
-    });
+    if (!bookings) {
+        return res.status(404).json({ message: "Booking couldn't be found"})
+    }
+    if (user.id === spot.ownerId) {
+        let bookingsList = [];
+        bookings.forEach(booking => {
+          bookingsList.push(booking.toJSON());
+        });
+    } else {
+        res.status(403).json({ message: "Spot must belong to current user"})
+    }
     res.json({ Bookings: bookings });
   });
+
+
+
 
 //Create a booking from a spot based on the spots id //!! go back
 router.post('/:spotId/bookings', requireAuth, async(req, res) => {

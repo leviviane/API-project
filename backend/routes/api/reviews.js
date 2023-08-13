@@ -113,8 +113,10 @@ router.put('/:reviewsId', validateReview, requireAuth, async (req, res)=> {
                 stars
             })
         } else {
-            res.status(404).json({ message: "Review couldn't be found"})
+            res.status(403).json({ message: "Reviews must belong to current user" })
         }
+    } else {
+        res.status(404).json({ message: "Review couldn't be found"})
     }
     res.json(editReview)
 })

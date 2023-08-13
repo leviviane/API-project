@@ -39,21 +39,21 @@ router.get('/current', requireAuth, async(req, res) => {
 router.put('/:bookingsId', requireAuth, async(req, res) => {
     const editBooking = await Booking.findByPk(req.params.bookingsId);
     const user = await User.findByPk(req.user.id);
-
     if (editBooking) {
         if (editBooking.userId === user.id) {
             const { startDate, endDate} = req.body
-
             await editBooking.update({
                 startDate,
                 endDate
             })
         } else {
-            res.status(404).json({ message: "Booking couldn't be found"})
+            res.status(403).json({ message: "Booking must belong to current user" })
         }
+    } else {
+        res.status(404).json({ message: "Booking couldn't be found"})
     }
     res.json(editBooking)
-});
+})
 
 //Delete a booking
 router.delete('/:bookingId', requireAuth, async (req, res) => {
