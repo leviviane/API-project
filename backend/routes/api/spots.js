@@ -490,40 +490,77 @@ router.get('/:spotId/reviews', async (req, res) => {
 
 
 // Get all bookings for a spot based on the spots id
-router.get('/:spotId/bookings', requireAuth, async(req, res) => {
+// router.get('/:spotId/bookings', requireAuth, async(req, res) => {
+//     let spotId = req.params.spotId;
+//     let user = await User.findByPk(req.user.id)
+//     let spot = await Spot.findOne({
+//         where: { id: spotId }
+//     });
+
+//     const bookings = await Booking.findAll({
+//         where: {
+//             spotId
+//         },
+//         include: [
+//             {
+//                 model: User,
+//                 attributes: ['id', 'firstName', 'lastName']
+//             }
+//         ]
+//     })
+//     if (!spot) {
+//         return res.status(404).json({ message: "Spot couldn't be found"})
+//     }
+//     if (!bookings) {
+//         return res.status(404).json({ message: "Booking couldn't be found"})
+//     }
+//     if (user.id === spot.ownerId) {
+//         let bookingsList = [];
+//         bookings.forEach(booking => {
+//           bookingsList.push(booking.toJSON());
+//         });
+//     } else {
+//         res.status(403).json({ message: "Spot must belong to current user"})
+//     }
+//     res.json({ Bookings: bookings });
+//   });
+
+// From Franco. Currently, the GET /spots/:spotId/bookings is just responding with “message”: “Spot must belong to current user”, which should not be the case. Non-spot owners should still get a valid response from this endpoint, rather just different from the spot owner responses.
+
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     let spotId = req.params.spotId;
-    let user = await User.findByPk(req.user.id)
     let spot = await Spot.findOne({
         where: { id: spotId }
     });
 
-    const bookings = await Booking.findAll({
-        where: {
-            spotId
-        },
-        include: [
-            {
-                model: User,
-                attributes: ['id', 'firstName', 'lastName']
-            }
-        ]
-    })
-    if (!spot) {
-        return res.status(404).json({ message: "Spot couldn't be found"})
-    }
-    if (!bookings) {
-        return res.status(404).json({ message: "Booking couldn't be found"})
-    }
-    if (user.id === spot.ownerId) {
-        let bookingsList = [];
-        bookings.forEach(booking => {
-          bookingsList.push(booking.toJSON());
-        });
+    if (spot) {
+        if (spotId === spot.ownerId) {
+            const bookings = await Booking.findAll({
+                where: {
+                    spotId: spot.id,
+                },
+                include: [
+                    {
+                        model: User,
+                        attributes: ["id", "firstName", "lastName"]
+                    }],
+            });
+            res.json({ Bookings: bookings })
+        } else {
+            const notBookings = await Booking.findAll({
+                where: {
+                    spotId: spot.id,
+                },
+                attributes: ["spotId", "startDate", "endDate"],
+            });
+
+            res.json({ Bookings: notBookings });
+        }
     } else {
-        res.status(403).json({ message: "Spot must belong to current user"})
+        res.status(404);
+        res.json({ message: "Spot couldn't be found" });
     }
-    res.json({ Bookings: bookings });
-  });
+});
 
 
 
