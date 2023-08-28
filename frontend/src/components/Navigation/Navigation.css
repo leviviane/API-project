@@ -1,10 +1,10 @@
-#logo-name-bar {
+#logo-name-container {
     color: black;
     margin-left: 30px;
     font-family: sans-serif;
   }
 
-#logo-bar {
+#logo-container {
     color: black;
     border-bottom: lightgray 2px solid;
     display: flex;
@@ -13,11 +13,11 @@
     cursor: pointer;
   }
 
-  #logo-bar > a {
+  #logo-container > a {
     text-decoration: none;
   }
 
-  #nav-bar {
+  #nav-container {
     color: black;
     font-family: sans-serif;
     font-size: 20px;
@@ -29,7 +29,7 @@
     padding: 10px 10px
   }
 
-  #nav-bar > * {
+  #nav-container > * {
     background-color: white;
     font-size: 20px;
     border: none;
