@@ -1,0 +1,41 @@
+#logo-name-bar {
+    color: black;
+    margin-left: 30px;
+    font-family: sans-serif;
+  }
+
+#logo-bar {
+    color: black;
+    border-bottom: lightgray 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  #logo-bar > a {
+    text-decoration: none;
+  }
+
+  #nav-bar {
+    color: black;
+    font-family: sans-serif;
+    font-size: 20px;
+    border-radius: 30px;
+    border: #22223b 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px
+  }
+
+  #nav-bar > * {
+    background-color: white;
+    font-size: 20px;
+    border: none;
+    margin-left: 5px;
+  }
+
+  .hidden {
+    display: none;
+  }
