@@ -1,23 +1,47 @@
-// frontend/src/store/index.js
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+// frontend/src/index.js
+import React from "react";
 
-const rootReducer = combineReducers({
-});
+import "./index.css";
 
-let enhancer;
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { ModalProvider, Modal } from "./context/Modal";
+import App from "./App";
 
-if (process.env.NODE_ENV === 'production') {
-  enhancer = applyMiddleware(thunk);
-} else {
-  const logger = require('redux-logger').default;
-  const composeEnhancers =
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  enhancer = composeEnhancers(applyMiddleware(thunk, logger));
+import configureStore from "./store";
+import { restoreCSRF, csrfFetch } from "./store/csrf";
+import * as sessionActions from "./store/session";
+
+const store = configureStore();
+
+if (process.env.NODE_ENV !== "production") {
+  restoreCSRF();
+
+  window.csrfFetch = csrfFetch;
+  window.store = store;
+  window.sessionActions = sessionActions;
 }
 
-const configureStore = (preloadedState) => {
-  return createStore(rootReducer, preloadedState, enhancer);
-};
+// Wrap the application with the Modal provider and render the Modal component
+// after the App component so that all the Modal content will be layered as
+// HTML elements on top of the all the other HTML elements:
+function Root() {
+  return (
+    <ModalProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+          <Modal />
+        </BrowserRouter>
+      </Provider>
+    </ModalProvider>
+  );
+}
 
-export default configureStore;
+ReactDOM.render(
+  <React.StrictMode>
+    <Root />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
