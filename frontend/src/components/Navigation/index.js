@@ -12,7 +12,7 @@ function Navigation({ isLoaded }){
     <ul id='logo-container'>
       <NavLink exact to='/'>
         <div id='logo-name-container'>
-        <i class="fa-brands fa-airbnb"></i>
+          <i class="fa-brands fa-airbnb"></i>
           <h1>Vivbnb</h1>
         </div>
       </NavLink>
