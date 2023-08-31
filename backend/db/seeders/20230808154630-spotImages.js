@@ -14,17 +14,17 @@ module.exports = {
       {
         spotId: 1,
         preview: true,
-        url: 'www.enhahouse'
+        url: 'https://media.discordapp.net/attachments/1126629909419262092/1146222898357481592/hybe.jpg?width=403&height=539'
       },
       {
         spotId: 2,
         preview: true,
-        url: 'www.cityview'
+        url: 'https://cdn.discordapp.com/attachments/1126629909419262092/1146222897833181264/jyp.jpg'
       },
       {
         spotId: 3,
-        preview: false,
-        url: 'www.lasvegascondo',
+        preview: true,
+        url: 'https://cdn.discordapp.com/attachments/1126629909419262092/1146222898667847740/aroundus.jpg',
       }
     ])
     /**
