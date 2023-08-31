@@ -1,10 +1,67 @@
 .spots-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-    align-self: start;
-
-    column-gap: 15px;
+    /* grid-gap: 10px;
+    align-self: start; */
+    gap: -500px;
     margin-top: 20px;
     margin-left: 20px;
 }
+
+.image img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15%;
+}
+
+.spot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+.spot-title {
+    text-decoration: none;
+    color: darkgray;
+    display: inline-block;
+  }
+
+  .name {
+    text-decoration: none;
+  }
+
+  .cityState {
+    text-decoration: none;
+  }
+
+  .ratings {
+    text-decoration: none;
+    color: black;
+  }
+
+  .price {
+    text-decoration: none;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .right-side-ratings {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+    width: 100%;
+  }

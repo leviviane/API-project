@@ -1,5 +1,5 @@
 #logo-container {
-    color: black;
+    color: #a19ef0;
     border-bottom: lightgray 2px solid;
     display: flex;
     align-items: center;
@@ -11,8 +11,22 @@
     text-decoration: none;
   }
 
+  .spot-link {
+    text-decoration: none;
+  }
+
+  /* #create-spot-container {
+  display: flex;
+  align-items: center;
+} */
+
+/* #create-spot-container p {
+  margin: 0;
+  padding: 10px;
+} */
+
  #logo-name-container {
-    color: black;
+    color: #a19ef0;
     margin-left: -30px;
     display: flex;
     align-items: center;
@@ -21,15 +35,16 @@
   }
 
   #nav-container {
-    color: black;
+    color: #a19ef0;
     font-family: sans-serif;
     font-size: 20px;
     border-radius: 30px;
-    border: #22223b 2px solid;
+    border: #a19ef0 2px solid;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 10px
+    padding: 10px 10px;
+    margin-left: -1200px;
   }
 
   #nav-container > * {
@@ -42,6 +57,7 @@
   .hidden {
     display: none;
   }
+
 
   /* ul li:hover .profile-dropdown {
     display: block;

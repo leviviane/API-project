@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_SPOTS = 'spots/loadSpot';
 const LOAD_DETAILS = 'spots/loadDetails';
-const ADD_SPOTS = 'spots/addSpot';
+const CREATE_SPOT = 'spots/createSpot';
 
 const loadSpots = (spots) => {
     return {
@@ -18,12 +18,14 @@ const loadDetails = (spot) => {
     };
 };
 
-const addSpot = (spot) => {
-    return {
-        type: ADD_SPOTS,
-        payload: spot
-    };
+const createNewSpot = (spot) => {
+  return {
+      type: CREATE_SPOT,
+      payload: spot
+  };
 };
+
+
 
 //THUNKS
 export const getLoadedSpots = () => async(dispatch) => {
@@ -46,23 +48,25 @@ export const getSpotDetails = (spotId) => async(dispatch) => {
     };
 };
 
-export const createSpot = (spot) => async(dispatch) => {
-    const response = await csrfFetch('/api/spots', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(spot)
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      }
+export const createSpot = (spotData) => async (dispatch) => {
+  const response = await csrfFetch('/api/spots', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(spotData),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(createNewSpot(data));
+    return true;
+  }
+  return false;
 }
 
 const initialState = {
     allSpots: {},
-    oneSpot: {}
-
+    singleSot: {}
 }
 
 const spotsReducer = (state = initialState, action) => {
@@ -70,24 +74,27 @@ const spotsReducer = (state = initialState, action) => {
     switch(action.type) {
       case LOAD_SPOTS:
         newState = {};
-        console.log(action)
+        // console.log(action)
         action.payload.Spots.forEach((spot) => {
           newState[spot.id] = spot;
         });
-        return newState
+        return newState;
+
       case LOAD_DETAILS:
-        const oneSpot = action.spot
-        newState = {...state, oneSpot}
+        const singleSpot = action.spot
+        newState = {...state, singleSpot}
         return newState;
-        default:
-        return state
 
-    case ADD_SPOTS:
-        newState = {...state};
-        newState.allSpots[action.spot.id] = action.spot;
-        return newState;
-    }
+      case CREATE_SPOT:
+        newState = {...state, allSpots: {...state.allSpots,[action.payload.id]: action.payload,
+        },
+      };
+      return newState;
+
+    default:
+      return state;
+
   }
-
+}
 
 export default spotsReducer;

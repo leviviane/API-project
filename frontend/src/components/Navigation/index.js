@@ -12,10 +12,28 @@ function Navigation({ isLoaded }){
     <ul id='logo-container'>
       <NavLink exact to='/'>
         <div id='logo-name-container'>
-          <i class="fa-brands fa-airbnb"></i>
-          <h1>Vivbnb</h1>
+        <i class="fa-brands fa-airbnb fa-2xl"></i>
+          <h1>VivBnb</h1>
         </div>
       </NavLink>
+
+      {/* <div id='create-spot-container'>
+        <div id='spot-link'>
+          {sessionUser && (
+            <NavLink className='nav-link' exact to='/spots'>
+              <p>Create a New Spot</p>
+            </NavLink>
+          )}
+        </div>
+      </div> */}
+
+      {sessionUser && (
+        <div id='create-spot-container'>
+          <NavLink className='spot-link' exact to='/spots'>
+            <p>Create a New Spot</p>
+          </NavLink>
+        </div>
+      )}
 
       {isLoaded && (
         <div id='nav-container'>
