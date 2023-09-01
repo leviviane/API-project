@@ -20,12 +20,13 @@ function SpotDetails() {
   return (
     <div className='spot-detail-container'>
       <div className='image-container'>
-        <img className='spot-image' src={spot.previewImage} alt='' />
         <div className='spot-detail'>
-          <div className='spot-name'>{spot.name}</div>
-          <div className='spot-location'>
-            {spot.city}, {spot.state}, {spot.country}
+          <div className='spot-name'><h1>{spot.name}</h1>
           </div>
+          <div className='spot-location'>
+            <h4>{spot.city}, {spot.state}, {spot.country}</h4>
+          </div>
+        <div className='image'><img src={spotId.previewImage} alt='' /></div>
           <div className='spot-price'>${spot.price} / night</div>
           <div className='spot-review'>
             <i className='fa-solid fa-star'></i>
