@@ -1,0 +1,8 @@
+#reserve-button {
+    color: white;
+    background-color: rgb(248, 163, 163);
+    align-self: center;
+    width: 250px;
+    padding: 10px;
+    cursor: pointer;
+  }
