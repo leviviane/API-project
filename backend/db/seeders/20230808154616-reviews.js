@@ -14,19 +14,19 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        review: 'Great place for my family',
+        review: "Can't believe we ran into Enhypen while at Hybe. Super cool and new building, highly recommend checking it out!",
         stars: 5
       },
       {
         spotId: 2,
         userId: 2,
-        review: 'A perfect getaway place for two people',
+        review: "So many cool things inside JYP. Their selection for organic food was insane!",
         stars: 4
       },
       {
         spotId: 3,
         userId: 3,
-        review: 'Incredibly dirty and was not as shown in pictures',
+        review: "Pictures shown are both different building and when we got there, the place wasnt as described. Very disappointing!",
         stars: 1
       }
     ])

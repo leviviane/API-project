@@ -19,8 +19,8 @@ module.exports = {
         country: 'USA',
         lat: 100.90,
         lng: 200.90,
-        name: 'Enhahouse',
-        description: 'House by the beach with four bedrooms and two baths',
+        name: 'Hybe',
+        description: 'Home to some of the best groups like Enhypen, NewJeans, and LE SSERAFIM',
         price: 500
       },
       {
@@ -31,8 +31,8 @@ module.exports = {
         country: 'USA',
         lat: 123.90,
         lng: 300.90,
-        name: 'City view house',
-        description: 'Downtown city view with one bedroom and one bath',
+        name: 'JYPE',
+        description: 'New JYP building that GOT7 practically built and all left',
         price: 350
       },
       {
@@ -43,8 +43,8 @@ module.exports = {
         country: 'USA',
         lat: 450.90,
         lng: 902.90,
-        name: 'Las Vegas Strip Condo',
-        description: 'Condo directly on the strip with a pool',
+        name: 'AroundUs',
+        description: 'A small entertainment company',
         price: 1000
       }
     ])
