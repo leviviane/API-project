@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import './AllSpots.css';
-import { getLoadedSpots } from '../../store/spots';
+import { getLoadedSpotsThunk } from '../../store/spots';
 
 function AllSpots() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function AllSpots() {
   const objAllSpots = Object.values(selectAllSpots);
 
   useEffect(() => {
-    dispatch(getLoadedSpots())
+    dispatch(getLoadedSpotsThunk())
   }, [dispatch]);
 
   return (

@@ -2,12 +2,17 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_SPOTS = 'spots/loadSpot';
 const LOAD_DETAILS = 'spots/loadDetails';
-const CREATE_SPOT = 'spots/createSpot';
+const CREATE_SPOT = 'spots/createSpot'
+const ADD_IMAGE = 'spots/addImage';
+const UPDATE_SPOT = 'spots/updateSpots';
+const GET_USER = 'spots/getUsers';
+const DELETE_SPOT = 'spots/deleteSpot';
 
-const loadSpots = (spots) => {
+
+const loadSpots = (spot) => {
     return {
         type: LOAD_SPOTS,
-        payload: spots,
+        payload: spot,
     };
 };
 
@@ -25,48 +30,118 @@ const createNewSpot = (spot) => {
   };
 };
 
+const addImage = (img, spotId) => {
+  return {
+    type: ADD_IMAGE,
+    payload: img, spotId
+  };
+};
+
+const updateSpots = (spot) => {
+  return {
+    type: UPDATE_SPOT,
+    payload: spot
+  };
+};
+
+const getUsers = (spot) => {
+  return {
+    type: GET_USER,
+    payload: spot
+  };
+};
+
+const deleteSpot = (spotId) => {
+  return {
+    type: DELETE_SPOT,
+    payload: spotId
+  }
+}
 
 
-//THUNKS
-export const getLoadedSpots = () => async(dispatch) => {
-    const response = await csrfFetch('/api/spots');
-    console.log('response: ', response)
-    if (response.ok) {
-      const data = await response.json();
+//!! try and rename everything with thunk so its less confusing
+//THUNK get all spots
+export const getLoadedSpotsThunk = () => async(dispatch) => {
+    const res = await csrfFetch('/api/spots');
+    // console.log('response: ', response)
+    if (res.ok) {
+      const data = await res.json();
       dispatch(loadSpots(data));
       return data;
     };
 };
 
-export const getSpotDetails = (spotId) => async(dispatch) => {
-    const response = await csrfFetch('/api/spots');
-    if (response.ok) {
-        const data = await response.json();
-        console.log(data)
+//THUNK get spot details
+export const getSpotDetailsThunk = (spotId) => async(dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`);
+    if (res.ok) {
+        const data = await res.json();
         dispatch(loadDetails(data))
-        return response;
+        return res;
     };
 };
 
-
-export const createSpot = (spotData) => async (dispatch) => {
-  const response = await csrfFetch('/api/spots', {
+//THUNK create a spot
+export const createSpotThunk = (spotData) => async (dispatch) => {
+  const res = await csrfFetch('/api/spots', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(spotData),
   });
 
-  if (response.ok) {
-    const data = await response.json();
+  if (res.ok) {
+    const data = await res.json();
     dispatch(createNewSpot(data));
     return true;
   }
   return false;
 }
 
+//THUNK add images
+export const addSpotImageThunk = (img, spotId) => async (dispatch) => {
+  const { url, preview } = img;
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'POST',
+    body: JSON.stringify({ url, preview }),
+  });
+
+  if (res.ok) {
+    const uploadedImage = await res.json();
+    dispatch(addImage(uploadedImage, spotId));
+    return uploadedImage;
+  }
+}
+
+//THUNK update a spot
+export const updateSpotThunk = (spot, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(spot),
+  });
+
+  if (res.ok) {
+    const spot = await res.json();
+    dispatch(updateSpots(spot));
+    return spot;
+  }
+}
+
+//THUNK get user
+export const getUserSpotThunk = () => async (dispatch) => {
+  const res = await csrfFetch('/api/spots/current');
+  if (res.ok) {
+    const spots = await res.json();
+    dispatch(getUsers(spots));
+    return spots;
+  }
+}
+
+//THUNK delete spot
+
 const initialState = {
     allSpots: {},
-    singleSot: {}
+    singleSpot: {}
 }
 
 const spotsReducer = (state = initialState, action) => {
@@ -81,7 +156,7 @@ const spotsReducer = (state = initialState, action) => {
         return newState;
 
       case LOAD_DETAILS:
-        const singleSpot = action.spot
+        const singleSpot = action.payload
         newState = {...state, singleSpot}
         return newState;
 
@@ -89,6 +164,12 @@ const spotsReducer = (state = initialState, action) => {
         newState = {...state, allSpots: {...state.allSpots,[action.payload.id]: action.payload,
         },
       };
+      return newState;
+      case UPDATE_SPOT: {
+        const newState = { ...state, allSpots: { ...state.allSpots }, singleSpot: { ...state.singleSpot },
+        };
+        newState.allSpots[action.spot.id] = { ...newState.allSpots[action.spotId], ...action.spot };
+      }
       return newState;
 
     default:
