@@ -2,16 +2,19 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { getSpotsThunk } from '../../store/spots';
 import './AllSpots.css';
-import { getLoadedSpotsThunk } from '../../store/spots';
 
-function AllSpots() {
+function SpotsLandingPage() {
   const dispatch = useDispatch();
-  const selectAllSpots = useSelector(state => state.spots);
+
+  //selects store data objects
+  const selectAllSpots = useSelector(state => state.spots.allSpots);
   const objAllSpots = Object.values(selectAllSpots);
+  // console.log('objAllSpots: ', objAllSpots)
 
   useEffect(() => {
-    dispatch(getLoadedSpotsThunk())
+    dispatch(getSpotsThunk())
   }, [dispatch]);
 
   return (
@@ -34,4 +37,4 @@ function AllSpots() {
   )
 }
 
-export default AllSpots;
+export default SpotsLandingPage;
