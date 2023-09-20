@@ -19,8 +19,8 @@ module.exports = {
         country: 'USA',
         lat: 100.90,
         lng: 200.90,
-        name: 'Hybe',
-        description: 'Home to some of the best groups like Enhypen, NewJeans, and LE SSERAFIM',
+        name: 'Cafe Onion',
+        description: 'A hanok turned coffee shop. We are one of the trendiest cafes in Seoul',
         price: 500
       },
       {
@@ -31,8 +31,8 @@ module.exports = {
         country: 'USA',
         lat: 123.90,
         lng: 300.90,
-        name: 'JYPE',
-        description: 'New JYP building that GOT7 practically built and all left',
+        name: 'Cafe Knotted',
+        description: 'A bright and vibrant cafe. Come try our many pastries and great drinks',
         price: 350
       },
       {
@@ -43,8 +43,8 @@ module.exports = {
         country: 'USA',
         lat: 450.90,
         lng: 902.90,
-        name: 'AroundUs',
-        description: 'A small entertainment company',
+        name: 'Cafe Layered',
+        description: 'A London inspired cafe with delicious coffee, tea, and pastries',
         price: 1000
       }
     ])
