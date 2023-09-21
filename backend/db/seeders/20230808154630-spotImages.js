@@ -14,7 +14,7 @@ module.exports = {
       {
         spotId: 1,
         preview: true,
-        url: 'https://media.discordapp.net/attachments/1126629909419262092/1146222898357481592/hybe.jpg?width=403&height=539'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550354936070294/cafe-onion-main.jpeg'
       },
       {
         spotId: 1,
@@ -29,7 +29,7 @@ module.exports = {
       {
         spotId: 2,
         preview: true,
-        url: 'https://cdn.discordapp.com/attachments/1126629909419262092/1146222897833181264/jyp.jpg'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550366839517306/knotted-main.webp'
       },
       {
         spotId: 2,
@@ -44,7 +44,7 @@ module.exports = {
       {
         spotId: 3,
         preview: true,
-        url: 'https://cdn.discordapp.com/attachments/1126629909419262092/1146222898667847740/aroundus.jpg',
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550403430629396/layered-main.jpeg',
       },
       {
         spotId: 3,
