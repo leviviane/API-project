@@ -235,7 +235,7 @@ router.get('/current', requireAuth, async (req, res) => {
 //get details of a spot from an id
 router.get('/:spotId', async (req, res) => {
     const spotId = req.params.spotId
-    const userId = req.user.id;
+    // const userId = req.user.id;
 
     let spot = await Spot.findOne({
         where: {

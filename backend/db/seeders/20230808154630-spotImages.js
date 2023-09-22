@@ -19,27 +19,57 @@ module.exports = {
       {
         spotId: 1,
         preview: false,
-        url: 'https://files.slack.com/files-tmb/T03GU501J-F05QJUQLLUB-164a7cb82c/hybe2_720.jpg'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154915610153721947/onion-one.jpeg'
       },
       {
         spotId: 1,
         preview: false,
-        url: 'https://files.slack.com/files-tmb/T03GU501J-F05QJUQ61K5-79dbd29404/hybe3_720.jpg'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154915639262203924/onion-three.jpeg'
+      },
+      {
+        spotId: 1,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154916016296562768/onion-four.jpeg'
+      },
+      {
+        spotId: 1,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154915953759498280/onion-two.jpeg'
+      },
+      {
+        spotId: 1,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154916038543151136/onion-five.jpeg'
       },
       {
         spotId: 2,
         preview: true,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550366839517306/knotted-main.webp'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154926764334784512/layered-main.jpeg'
       },
       {
         spotId: 2,
         preview: false,
-        url: 'https://files.slack.com/files-tmb/T03GU501J-F05QK2NKQF4-02d7f43b30/jyp2_720.png'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925690609750077/knotted-one.jpeg'
       },
       {
         spotId: 2,
         preview: false,
-        url: 'https://files.slack.com/files-tmb/T03GU501J-F05QG4Z8G8M-1e9cfa0afa/jyp3_720.jpg'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925709601542195/knotted-two.jpeg'
+      },
+      {
+        spotId: 2,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925738319958098/knotted-three.jpeg'
+      },
+      {
+        spotId: 2,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925757286584320/knotted-four.jpeg'
+      },
+      {
+        spotId: 2,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925774864920728/knotted-five.jpeg'
       },
       {
         spotId: 3,
@@ -49,12 +79,27 @@ module.exports = {
       {
         spotId: 3,
         preview: false,
-        url: 'https://files.slack.com/files-tmb/T03GU501J-F05R8PN2FJL-7c0bde31fe/aroundus2_720.jpg'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917566062530630/layered-one.jpeg'
       },
       {
         spotId: 3,
         preview: false,
-        url: 'https://files.slack.com/files-tmb/T03GU501J-F05QK32V3M0-c036f05433/aroundus3_720.jpg'
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917581363351603/layered-two.jpeg'
+      },
+      {
+        spotId: 3,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917595867259121/layered-three.jpeg'
+      },
+      {
+        spotId: 3,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917620395557005/layered-four.jpeg'
+      },
+      {
+        spotId: 3,
+        preview: false,
+        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917642738597898/layered-five.jpeg'
       }
     ])
     /**
