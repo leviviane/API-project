@@ -24,6 +24,7 @@ function SpotsLandingPage() {
           <div key={spot.id} className='spot'>
             <div className='image'><img src={spot.previewImage} alt='spotImg' /></div>
             <div className='details'>
+              <h3 className='spot-name'>{spot.name}</h3>
               <span className='cityState'>{spot.city}, {spot.state}</span>
               <span className='price'>${spot.price}/night</span>
             </div>
