@@ -24,11 +24,6 @@ module.exports = {
       {
         spotId: 1,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154915639262203924/onion-three.jpeg'
-      },
-      {
-        spotId: 1,
-        preview: false,
         url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154916016296562768/onion-four.jpeg'
       },
       {
@@ -45,11 +40,6 @@ module.exports = {
         spotId: 2,
         preview: true,
         url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154926764334784512/layered-main.jpeg'
-      },
-      {
-        spotId: 2,
-        preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925690609750077/knotted-one.jpeg'
       },
       {
         spotId: 2,
@@ -75,11 +65,6 @@ module.exports = {
         spotId: 3,
         preview: true,
         url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550403430629396/layered-main.jpeg',
-      },
-      {
-        spotId: 3,
-        preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917566062530630/layered-one.jpeg'
       },
       {
         spotId: 3,
