@@ -1,0 +1,32 @@
+#spot-details-container{
+    padding: 20px 60px;
+    max-width: 1000px;
+    margin: auto;
+    font-family: sans-serif;
+    font-weight: 500;
+  }
+
+  .name-location-container > h2{
+    margin: 0;
+  }
+
+  .name-location-container > h4{
+    margin: 10px 0 20px;
+    overflow-wrap: break-word;
+  }
+
+  /* .image-container {
+    display: grid;
+    grid-template-columns: 575px 175px 175px;
+    grid-template-rows: 175px 175px;
+    row-gap: 5px;
+    column-gap: 5px;
+    margin: 30px;
+  } */
+
+  #spot-details-fourth-row{
+    margin: 20px 0;
+    display: flex;
+  }
+
+
