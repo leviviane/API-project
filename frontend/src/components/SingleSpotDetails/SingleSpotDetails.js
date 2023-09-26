@@ -20,7 +20,7 @@ function SingleSpotDetails () {
 
     // const noPreviewImage = spot.SpotImages.filter(image => !image.preview);
 
-    const handleClick = (e) => {
+    const reserveButton = (e) => {
         e.preventDefault();
         alert('Feature Coming Soon...')
     };
@@ -61,10 +61,10 @@ function SingleSpotDetails () {
                     </h5>
                     {spot.numReviews ? '·' : <p></p>}
                     <h5 className="numReviews">
-                        {spot.numReviews ? `${spot.numReviews}  ${spot.numReviews > 1 ? 'reviews' : 'review'}` : <p></p>}
+                        {spot.numReviews ? `${spot.numReviews} ${spot.numReviews > 1 ? 'reviews' : 'review'}` : <p></p>}
                     </h5>
                 </div>
-                <button className='reserve-button' onClick={handleClick}>Reserve</button>
+                <button className='reserve-button' onClick={reserveButton}>Reserve</button>
             </div>
         </div>
     )
