@@ -14,20 +14,20 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        review: "Can't believe we ran into Enhypen while at Hybe. Super cool and new building, highly recommend checking it out!",
-        stars: 5
+        review: "Literally the best cutest and most esthetics cafe ever!",
+        stars: 5.0
       },
       {
         spotId: 2,
         userId: 2,
-        review: "So many cool things inside JYP. Their selection for organic food was insane!",
-        stars: 4
+        review: "Super vibrant cafe with the cutest cakes ever!",
+        stars: 4.0
       },
       {
         spotId: 3,
         userId: 3,
-        review: "Pictures shown are both different building and when we got there, the place wasnt as described. Very disappointing!",
-        stars: 1
+        review: "Wanted to love this place, coffee could be a little better",
+        stars: 1.0
       }
     ])
     /**
