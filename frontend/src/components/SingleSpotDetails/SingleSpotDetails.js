@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom/";
 import { getSingleSpotThunk } from "../../store/spots";
+// import { getReviewsThunk } from "../../store/reviews";
 import './SingleSpotDetails.css';
 
 function SingleSpotDetails () {
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spots.singleSpot)
     const {spotId} = useParams();
+    // const review = useSelector((state) => state.reviews.reviews)
 
     useEffect(() => {
         dispatch(getSingleSpotThunk(spotId));
@@ -24,6 +26,14 @@ function SingleSpotDetails () {
         e.preventDefault();
         alert('Feature Coming Soon...')
     };
+
+    // const checkForReviews = (reviews) => {
+    //     if (reviews === 0) {
+    //         return 'New'
+    //     } else if (reviews === 1) {
+    //         return `${reviews} Review`
+    //     } else return `${reviews} Reviews`
+    // }
 
 
     return (
