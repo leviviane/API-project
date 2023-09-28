@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT';
 const ADD_SINGLE_SPOT = '/spots/ADD_SINGLE_SPOT';
-// const ADD_SPOT_IMAGE = '/spots/ADD_SPOT_IMAGE';
+const ADD_SPOT_IMAGE = '/spots/ADD_SPOT_IMAGE';
 
 //ACTION CREATORS
 //all spots landing
@@ -30,13 +30,13 @@ const createSpot = (spot) => {
   };
 };
 
-//add image
-// const addImage = (image) => {
-//   return {
-//     type: ADD_SPOT_IMAGE,
-//     image
-//     }
-//   }
+// add image
+const addImage = (image) => {
+  return {
+    type: ADD_SPOT_IMAGE,
+    image
+    }
+  }
 
 
 
@@ -79,11 +79,11 @@ export const createSpotThunk = (payload) => async dispatch => {
   }
 };
 //add image
-export const addSpotImageThunk = (payload, spotId) => async (dispatch) => {
+export const addSpotImageThunk = (image, spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(payload)
+    body: JSON.stringify(image)
   });
 
   if (res.ok) {

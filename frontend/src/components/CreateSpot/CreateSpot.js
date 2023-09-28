@@ -20,6 +20,8 @@ export const CreateSpotForm = () => {
   const [imgTwo, setImgTwo] = useState("");
   const [imgThree, setImgThree] = useState("");
   const [imgFour, setImgFour] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
   const [errors, setErrors] = useState({});
 
   function errorsChecked(
@@ -75,7 +77,7 @@ export const CreateSpotForm = () => {
 
     if (Object.keys(errorsFound).length === 0) {
 
-      try {
+      // try {
         const payload = {
           country,
           address,
@@ -88,8 +90,12 @@ export const CreateSpotForm = () => {
           imgOne,
           imgTwo,
           imgThree,
-          imgFour
+          imgFour,
+          lat: 1,
+          lng: 1
         };
+
+        // const image = {url, preview}
 
         const newSpot = await dispatch(createSpotThunk(payload));
         await dispatch(addSpotImageThunk(newSpot.id, previewImg, true));
@@ -102,10 +108,10 @@ export const CreateSpotForm = () => {
           dispatch(getSingleSpotThunk(newSpot.id));
           history.push(`/spots/${newSpot.id}`);
         }
-      } catch (error) {
-        console.error("ERROR:", error);
+      // } catch (error) {
+      //   console.error("ERROR:", error);
 
-      }
+      // }
     }
   };
 

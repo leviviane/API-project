@@ -128,7 +128,7 @@ function ProfileButton({ user }) {
         <>
           <div className="create-spot-container">
             {user ? (
-              <NavLink className="create-spot-line" to='/spots/new'>
+              <NavLink className="create-line" to='/spots/new'>
                 Create a New Spot
               </NavLink>
             ) : (
@@ -139,24 +139,24 @@ function ProfileButton({ user }) {
       </button>
           <ul className={ulClassName} ref={ulRef}>
             {user ? (
-              <div className='drop-down-container'>
+              <div className='main-drop-down-container'>
                   <div className='greetings-line'>Hello, {user.firstName}</div>
                   <div className='email-line'>{user.email}</div>
-                  {/* <NavLink className='manage-spot-line' to='/spots/current'>
+                  <NavLink className='manage-line' to='/spots/current'>
                     Manage Spots
-                  </NavLink> */}
-                <button className='logoutButton' onClick={logout}>Log Out</button>
+                  </NavLink>
+                <button className='logout-button' onClick={logout}>Log Out</button>
               </div>
             ) : (
-                <div className="loginSignup">
+                <div className='drop-down-container'>
                   <OpenModalMenuItem
-                    itemText="Log In"
+                    itemText='Log In'
                     onItemClick={closeMenu}
                     modalComponent={<LoginFormModal />}
                   />
 
                   <OpenModalMenuItem
-                    itemText="Sign Up"
+                    itemText='Sign Up'
                     onItemClick={closeMenu}
                     modalComponent={<SignupFormModal />}
                     />
