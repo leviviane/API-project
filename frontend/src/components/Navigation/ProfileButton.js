@@ -142,9 +142,9 @@ function ProfileButton({ user }) {
               <div className='drop-down-container'>
                   <div className='greetings-line'>Hello, {user.firstName}</div>
                   <div className='email-line'>{user.email}</div>
-                  <NavLink className='manage-spot-line' to='/spots/current'>
+                  {/* <NavLink className='manage-spot-line' to='/spots/current'>
                     Manage Spots
-                  </NavLink>
+                  </NavLink> */}
                 <button className='logoutButton' onClick={logout}>Log Out</button>
               </div>
             ) : (

@@ -24,17 +24,16 @@ const deleteReview = (reviewId) => ({
 })
 
 
-
 //THUNKS
 //get reviews
 export const getReviewsThunk = (spotId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
 
-    if (res.ok) {
-        const data = await res.json();
-        dispatch(getAllReviews(data))
-        return data;
-    }
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(getAllReviews(data));
+    return res;
+  }
 };
 
 //create a review
@@ -44,7 +43,7 @@ export const createReviewThunk = (spotId, review, stars, user) => async(dispatch
     if (res.ok) {
         const data = await res.json();
         dispatch(createReview(data))
-        return data;
+        return res;
     }
 };
 
@@ -62,18 +61,23 @@ export const deleteReviewThunk = (reviewId) => async(dispatch) => {
 };
 
 const initialState = {
-    reviews: {}
+    spot: {},
+    user: {}
 }
 
 const reviewsReducer = (state = initialState, action) => {
     let newState;
     switch(action.type) {
         case GET_ALL_REVIEWS:
-        newState = { ...state, reviews: {} }
-        action.reviews.Reviews.forEach(review => {
-          newState.reviews[review.id] = review
-        })
-        return newState;
+            return {
+                ...state,
+                spot: action.reviews
+            }
+            // newState = { ...state, allReviews: {} };
+            // action.reviews.Reviews.forEach((review) => {
+            //     newState.reviews[review.id] = review;
+            // });
+            return newState;
         case CREATE_REVIEW:
             newState = { ...state, reviews: { ...state.reviews }}
             newState.reviews[action.review.id] = action.review
