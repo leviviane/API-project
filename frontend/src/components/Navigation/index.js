@@ -27,14 +27,14 @@ function Navigation({ isLoaded }){
           )}
         </div>
       </div> */}
-
+{/*
       {sessionUser && (
         <div id='create-spot-container'>
           <NavLink className='spot-link' exact to='/spots'>
             <p>Create a New Spot</p>
           </NavLink>
         </div>
-      )}
+      )} */}
 
       {isLoaded && (
         <div id='nav-container'>

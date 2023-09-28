@@ -2,6 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT';
+const ADD_SINGLE_SPOT = '/spots/ADD_SINGLE_SPOT';
+// const ADD_SPOT_IMAGE = '/spots/ADD_SPOT_IMAGE';
 
 //ACTION CREATORS
 //all spots landing
@@ -19,6 +21,23 @@ const getSingleSpot = (spot) => {
     spot
   }
 }
+
+//create a spot
+const createSpot = (spot) => {
+  return {
+    type: ADD_SINGLE_SPOT,
+    spot
+  };
+};
+
+//add image
+// const addImage = (image) => {
+//   return {
+//     type: ADD_SPOT_IMAGE,
+//     image
+//     }
+//   }
+
 
 
 //THUNKS
@@ -46,6 +65,48 @@ export const getSingleSpotThunk = (spotId) => async (dispatch) => {
   };
 };
 
+//create a spot
+export const createSpotThunk = (payload) => async dispatch => {
+  const res = await csrfFetch(`/api/spots`, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    const newSpot = await res.json();
+    dispatch(createSpot(newSpot));
+    return newSpot;
+  }
+};
+//add image
+export const addSpotImageThunk = (payload, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/images`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    const addedSpotImage = await res.json();
+    return addedSpotImage
+  }
+};
+
+//update spot
+export const updateSpotThunk = (payload, spotId) => async dispatch => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  })
+
+  if (res.ok) {
+    const updateSpot = await res.json();
+    dispatch(createSpot(updateSpot))
+    return updateSpot;
+  }
+}
+
+
 const initialState = {
   allSpots: {},
   singleSpot: {}
@@ -63,7 +124,10 @@ const spotsReducer = (state = initialState, action) => {
     case GET_SINGLE_SPOT:
       newState = { ...state, singleSpot: action.spot}
       return newState;
-
+    case ADD_SINGLE_SPOT:
+      newState = { ...state, allSpots: {...state.allSpots}}
+      newState.allSpots[action.spot.id] = action.spot
+      return newState;
 
     default:
       return state;

@@ -4,7 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpots from './components/AllSpots/AllSpots';
-import SingleSpotDetails from './components/SingleSpotDetails/SingleSpotDetails'
+import SingleSpotDetails from './components/SingleSpotDetails/SingleSpotDetails';
+import CreateSpot from './components/CreateSpot/CreateSpot';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +22,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <AllSpots />
+        </Route>
+        <Route exact path ='/spots/new'>
+          <CreateSpot />
         </Route>
         <Route exact path='/spot/:spotId'>
           <SingleSpotDetails />

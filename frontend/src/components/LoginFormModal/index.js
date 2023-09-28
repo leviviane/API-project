@@ -24,6 +24,16 @@ function LoginFormModal() {
         });
     };
 
+    const loginDemo = (e) => {
+      return dispatch(sessionActions.login({ credential: 'Demo', password: 'password'}))
+      .then(closeModal)
+    }
+
+    // let disableButton = false;
+    // if (credential.length < 4 || password.length < 6) {
+    //   disableButton = true
+    // }
+
     return (
       <>
         <h1>Log In</h1>
@@ -49,8 +59,14 @@ function LoginFormModal() {
           {errors.credential && (
             <p>{errors.credential}</p>
           )}
-          <button type="submit">Log In</button>
+          <button className='logInButton'
+          type="submit"
+          disabled={credential.length < 4 || password.length < 6 }
+          >Log In</button>
         </form>
+        <button className='login-demo' onClick={(e) => loginDemo()}>
+        Demo User
+      </button>
       </>
     );
 }
