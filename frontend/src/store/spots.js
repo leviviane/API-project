@@ -4,6 +4,8 @@ const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS';
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT';
 const ADD_SINGLE_SPOT = '/spots/ADD_SINGLE_SPOT';
 const ADD_SPOT_IMAGE = '/spots/ADD_SPOT_IMAGE';
+const UPDATE_SPOT = '/spots/UPDATE_SPOT';
+const DELETE_SPOT = '/spots/DELETE_SPOT';
 
 //ACTION CREATORS
 //all spots landing
@@ -19,8 +21,8 @@ const getSingleSpot = (spot) => {
   return {
     type: GET_SINGLE_SPOT,
     spot
-  }
-}
+  };
+};
 
 //create a spot
 const createSpot = (spot) => {
@@ -35,9 +37,24 @@ const addImage = (image) => {
   return {
     type: ADD_SPOT_IMAGE,
     image
-    }
-  }
+    };
+  };
 
+// update spot
+const updateSpot = (spot) => {
+  return {
+    type: UPDATE_SPOT,
+    spot
+  }
+}
+
+//delete spot
+const deleteSpot = (spotId) => {
+  return {
+    type: DELETE_SPOT,
+    spotId
+  };
+};
 
 
 //THUNKS
@@ -66,7 +83,7 @@ export const getSingleSpotThunk = (spotId) => async (dispatch) => {
 };
 
 //create a spot
-export const createSpotThunk = (payload) => async dispatch => {
+export const createSpotThunk = (payload) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots`, {
     method: 'POST',
     body: JSON.stringify(payload)
@@ -79,11 +96,11 @@ export const createSpotThunk = (payload) => async dispatch => {
   }
 };
 //add image
-export const addSpotImageThunk = (image, spotId) => async (dispatch) => {
+export const addSpotImageThunk = (spotId, url, preview) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}/images`, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(image)
+    body: JSON.stringify({ url, preview})
   });
 
   if (res.ok) {
@@ -93,16 +110,28 @@ export const addSpotImageThunk = (image, spotId) => async (dispatch) => {
 };
 
 //update spot
-export const updateSpotThunk = (payload, spotId) => async dispatch => {
-  const res = await csrfFetch(`/api/spots/${spotId}`, {
+export const updateSpotThunk = (spot) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spot.id}`, {
     method: 'PUT',
-    body: JSON.stringify(payload)
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(spot)
+  });
+
+  if (res.ok) {
+    const spotUpdated = await res.json();
+    dispatch(updateSpot(spotUpdated));
+    return spotUpdated;
+  }
+};
+
+//delete spot
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+  const res = await createSpot(`api/spots/${spotId}`, {
+    method: 'DELETE',
   })
 
   if (res.ok) {
-    const updateSpot = await res.json();
-    dispatch(createSpot(updateSpot))
-    return updateSpot;
+    dispatch(deleteSpot(spotId))
   }
 }
 
@@ -127,6 +156,14 @@ const spotsReducer = (state = initialState, action) => {
     case ADD_SINGLE_SPOT:
       newState = { ...state, allSpots: {...state.allSpots}}
       newState.allSpots[action.spot.id] = action.spot
+      return newState;
+     case UPDATE_SPOT:
+      newState = { ...state, allSpots: { ...state.allSpots}}
+      newState.allSpots[action.payload.id] = action.payload;
+      return newState;
+    case DELETE_SPOT:
+      newState = { ...state, allSpots: { ...state.allSpots } };
+      delete newState.allSpots[action.spotId];
       return newState;
 
     default:

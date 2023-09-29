@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { useHistory } from 'react-router-dom'
 import "./LoginForm.css"; // Import your LoginForm.css file
 
 function LoginFormModal() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
@@ -25,8 +27,10 @@ function LoginFormModal() {
     };
 
     const loginDemo = (e) => {
-      return dispatch(sessionActions.login({ credential: 'Demo', password: 'password'}))
+      e.preventDefault();
+      dispatch(sessionActions.login({ credential: 'Demo', password: 'password' }))
       .then(closeModal)
+      history.push('/')
     }
 
     // let disableButton = false;
@@ -59,14 +63,15 @@ function LoginFormModal() {
           {errors.credential && (
             <p>{errors.credential}</p>
           )}
-          <button className='logInButton'
+          <button className='login-button'
           type="submit"
           disabled={credential.length < 4 || password.length < 6 }
           >Log In</button>
         </form>
-        <button className='login-demo' onClick={(e) => loginDemo()}>
+        {/* <button className='login-demo' onClick={(e) => loginDemo()}>
         Demo User
-      </button>
+      </button> */}
+      <button className='login-demo' onClick={loginDemo}>Demo User</button>
       </>
     );
 }

@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import AllSpots from './components/AllSpots/AllSpots';
 import SingleSpotDetails from './components/SingleSpotDetails/SingleSpotDetails';
 import CreateSpotForm from './components/CreateSpot/CreateSpot';
+import ManageSpots from "./components/ManageSpots/ManageSpots";
 
 
 function App() {
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route exact path ='/spots/new'>
           <CreateSpotForm />
+        </Route>
+        <Route exact path='/spots/current'>
+          <ManageSpots />
         </Route>
         <Route exact path='/spot/:spotId'>
           <SingleSpotDetails />
