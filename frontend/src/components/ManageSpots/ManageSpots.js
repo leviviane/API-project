@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, NavLink } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton';
-import { DeleteSpot } from '../ManageSpots/DeleteSpot';
-import { deleteSpotThunk, getSpotsByUserThunk } from '../../store/spots';
+import { DeleteSpot } from './DeleteSpot';
+import { getSpotsByUserThunk } from '../../store/spots';
 import './ManageSpots.css';
 
 function ManageSpots() {
@@ -20,29 +20,21 @@ function ManageSpots() {
         dispatch(getSpotsByUserThunk(userId));
     }, [dispatch, userId]);
 
-    if (!userSpots || listsOfSpots.length === 0) {
-        return null;
-    }
-
     const newSpot = () => {
         history.push('/spots/new');
-    };
-
-    const spotDelete = (spotId) => {
-        dispatch(deleteSpotThunk(spotId));
     };
 
     return (
         <div className="manage-spots-container">
             <h1>Manage Your Spots</h1>
             <div className="create-container">
-                    <button className="create-button" onClick={newSpot}>
-                        Create a Spot
-                    </button>
-                {listsOfSpots.length > 0 &&
+                <button className="create-button" onClick={newSpot}>
+                    Create a Spot
+                </button>
+                {listsOfSpots.length > 0 ? (
                     listsOfSpots.map((spot) => (
                         <div className="spot-manage" key={spot.id}>
-                            <NavLink to={`/spots/${spot.id}`}>
+                            <NavLink to={`/spot/${spot.id}`}>
                                 <img
                                     src={spot.previewImage}
                                     className="image-box"
@@ -69,7 +61,6 @@ function ManageSpots() {
                                 <div>
                                     <OpenModalButton
                                         buttonText="Delete"
-                                        onButtonClick={() => spotDelete(spot.id)}
                                         modalComponent={
                                             <DeleteSpot spotId={spot.id} ownerId={spot.ownerId} />
                                         }
@@ -77,14 +68,16 @@ function ManageSpots() {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    ))
+                ) : (
+                    <p>You don't have any spots yet.</p>
+                )}
             </div>
         </div>
     );
 }
 
 export default ManageSpots;
-
 
 
 //!!tried third time
@@ -177,7 +170,7 @@ export default ManageSpots;
 
 
 
-//!! use number 2
+//!! first try
 // import React, { useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { useHistory, useParams, NavLink } from 'react-router-dom';
@@ -264,47 +257,5 @@ export default ManageSpots;
 //         </div>
 //     );
 // };
-
-// export default ManageSpots;
-
-
-
-
-
-
-// import { useEffect } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory, NavLink } from 'react-router-dom';
-// import * as spotsAction from '../..store/spots';
-// import { getSpotsThunk } from '../../store/spots';
-// import { DeleteSpot } from '../ManageSpots/DeleteSpot';
-// import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
-// import './ManageSpots.css';
-
-// const ManageSpots = () => {
-//     const dispatch = useDispatch();
-//     const history = useHistory();
-//     const spots = useSelector((state) => state.spots.allSpots);
-//     // const users = useSelector((state) => state.sessions.user);
-
-//     let listOfSpots = Object.values(spots);
-
-//     useEffect(() => {
-//         dispatch(getSpotsThunk());
-//       }, [dispatch]);
-
-//       const newSpot = () => {
-//         return history.push('/spots/new') //look at CreateSpot.js
-//       }
-//         return (
-//             <div className='manage-spots-container'>
-//                 <h1>Manage Your Spots</h1>
-//                 <NavLink to={'/spots/new'}>
-//                     <button className='create-button' onClick={newSpot}>Create a New Spot</button>
-//                 </NavLink>
-//             </div>
-//         )
-//       }
-// }
 
 // export default ManageSpots;

@@ -1,16 +1,19 @@
 import { useDispatch } from "react-redux";
 import { useModal } from '../../context/Modal';
 import { deleteSpotThunk } from "../../store/spots";
-import './DeleteSpot.js';
 
-
-export const DeleteSpot = ({spotId}) => {
+export const DeleteSpot = ({ spotId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        dispatch(deleteSpotThunk(spotId).then(closeModal))
+        await dispatch(deleteSpotThunk(spotId)).then(closeModal);
+    }
+
+    const handleNoClick = async (e) => {
+        e.preventDefault();
+        closeModal();
     }
 
     return (
@@ -21,7 +24,7 @@ export const DeleteSpot = ({spotId}) => {
             </div>
             <div className='delete-button'>
                 <button className='yes-button' onClick={handleClick}>Yes (Delete Spot)</button>
-                <button className='no-button' onClick={handleClick}>No (Keep Spot)</button>
+                <button className='no-button' onClick={handleNoClick}>No (Keep Spot)</button>
             </div>
         </div>
     )
