@@ -7,6 +7,8 @@ import AllSpots from './components/AllSpots/AllSpots';
 import SingleSpotDetails from './components/SingleSpotDetails/SingleSpotDetails';
 import CreateSpotForm from './components/CreateSpot/CreateSpot';
 import ManageSpots from "./components/ManageSpots/ManageSpots";
+import UpdateSpot from "./components/ManageSpots/UpdateSpot";
+
 
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
         <Route exact path='/spots/current'>
           <ManageSpots />
         </Route>
+        <Route exact path='/spots/:spotId/edit'>
+          <UpdateSpot />
+        </Route>
         <Route exact path='/spot/:spotId'>
           <SingleSpotDetails />
         </Route>
@@ -38,5 +43,6 @@ function App() {
 
   );
 }
+
 
 export default App;

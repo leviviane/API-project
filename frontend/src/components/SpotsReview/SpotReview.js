@@ -28,9 +28,14 @@ export const SpotReview = () => {
 
     // const listOfReviews = Object.values(reviews.Reviews).reverse()
     const listOfReviews = reviews
+    if (!listOfReviews) {
+      return null;
+    }
     //organizing reviews in descending order
 
-    const previousReviews = user && listOfReviews.find((review) => review.userId === user.id);
+    const listOfReviewsArray = Object.values(listOfReviews);
+    const previousReviews = user && listOfReviewsArray.find((review) => review.userId === user.id);
+
 
     const { avgStarRating, numReviews } = spot;
 

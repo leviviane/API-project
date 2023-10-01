@@ -84,6 +84,7 @@ export const getSingleSpotThunk = (spotId) => async (dispatch) => {
     const spot = await res.json();
     dispatch(getSingleSpot(spot));
     return res;
+
   }
 };
 
@@ -142,12 +143,12 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 };
 
 // get spots by user
-export const getSpotsByUserThunk = () => async dispatch => {
-  const response = await csrfFetch('/api/spots/current')
-  if (response.ok) {
-      const userSpots = await response.json()
+export const getSpotsByUserThunk = () => async (dispatch) => {
+  const res = await csrfFetch('/api/spots/current')
+  if (res.ok) {
+      const userSpots = await res.json()
       dispatch(getSpotsByUser(userSpots))
-      return userSpots
+      return userSpots;
   }
 }
 
@@ -175,7 +176,7 @@ const spotsReducer = (state = initialState, action) => {
       return newState;
     case UPDATE_SPOT:
       newState = { ...state, allSpots: { ...state.allSpots } };
-      newState.allSpots[action.payload.id] = action.payload;
+      newState.allSpots[action.spot.id] = action.spot;
       return newState;
     case DELETE_SPOT:
       newState = { ...state, allSpots: { ...state.allSpots } };

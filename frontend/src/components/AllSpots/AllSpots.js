@@ -17,6 +17,13 @@ function SpotsLandingPage() {
     dispatch(getSpotsThunk())
   }, [dispatch]);
 
+  if (!objAllSpots.length || !objAllSpots) {
+    console.log('entered')
+    dispatch(getSpotsThunk())
+    return null;
+  }
+  console.log('objAllSpots:', objAllSpots)
+
   return (
     <div className="spots-container">
       {objAllSpots.map(spot => (
