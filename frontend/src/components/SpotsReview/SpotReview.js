@@ -87,7 +87,7 @@ export const SpotReview = () => {
                 {listOfReviews.map((review) => (
                   <div key={review.id}>
                     <div className="review-container">
-                      <h3 className="user-name">{review.User.firstName}</h3>
+                      <h3 className="user-name">{review?.User?.firstName}</h3>
                       <h4 className="review-date">
                         {createDate(review.createdAt)}
                       </h4>

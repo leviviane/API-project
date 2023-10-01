@@ -43,14 +43,19 @@ import { deleteReviewThunk } from '../../store/reviews';
 import './DeleteReview';
 
 
-function DeleteReviewModal({ review }) {
+function DeleteReviewModal({ reviewId }) {
     const dispatch = useDispatch()
 
     const { closeModal } = useModal();
 
     const handleDelete = (e) => {
         e.preventDefault();
-        dispatch(deleteReviewThunk(review))
+        dispatch(deleteReviewThunk(reviewId))
+        closeModal();
+    }
+
+    const noDelete = (e) => {
+        e.preventDefault();
         closeModal();
     }
 
@@ -66,7 +71,7 @@ function DeleteReviewModal({ review }) {
                 </button>
                 <button
                 id='no-button'
-                onClick={handleDelete}>
+                onClick={noDelete}>
                     No (Keep Review)
                 </button>
             </div>
