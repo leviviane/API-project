@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom/';
+import { useParams } from 'react-router-dom';
 import { getSingleSpotThunk } from '../../store/spots';
 import { getReviewsThunk } from '../../store/reviews';
 import { SpotReview } from '../SpotsReview/SpotReview';
@@ -25,8 +25,6 @@ function SingleSpotDetails() {
     alert('Feature Coming Soon...');
   };
 
-  let counter = 1;
-
   return (
     <div className='spots-details-container'>
       <div className='name-location-container'>
@@ -35,33 +33,34 @@ function SingleSpotDetails() {
       </div>
       <div className='spot-images-container'>
         {spot.SpotImages &&
-          spot.SpotImages.map((image) => (
-            <img src={image.url} key={image.id} className={`image${counter++}`} />
+          spot.SpotImages.map((image, index) => (
+            <img src={image.url} key={image.id} className={`image${index + 1}`} alt={`Spot Image ${index + 1}`} />
           ))}
       </div>
       <div className='host-container'>
         <h3>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h3>
-        <div>
         <h4>{spot.description}</h4>
-        </div>
       </div>
       <div className='price-reserve-container'>
-        <div className='flex-right-container'>
+        <div className='price-info-container'>
           <div className='price-container'>
-            <h4>${spot.price} </h4>
+            <h4>${spot.price}</h4>
+          </div>
+          <div className='night-container'>
             <h5>night</h5>
           </div>
-          <div className='reviews-container'>
-            <h5 className='ratings'>
-              <i className='fa-solid fa-star'></i>{!spot.avgStarRating ? <span>NEW</span> : spot.avgStarRating.toFixed(1)}
-            </h5>
+          <div className='ratings-container'>
+            <i className='fa-solid fa-star'></i>
+            {!spot.avgStarRating ? <span>NEW</span> : spot.avgStarRating.toFixed(1)}
             {spot.numReviews ? '·' : <p></p>}
-            <h5 className='numReviews'>
-              {spot.numReviews ? `${spot.numReviews} ${spot.numReviews > 1 ? 'reviews' : 'review'}` : <p></p>}
-            </h5>
+            {spot.numReviews ? (
+              `${spot.numReviews} ${spot.numReviews > 1 ? 'reviews' : 'review'}`
+            ) : (
+              <p></p>
+            )}
           </div>
-          <button className='reserve-button' onClick={reserveButton}>Reserve</button>
         </div>
+        <button className='reserve-button' onClick={reserveButton}>Reserve</button>
       </div>
       <SpotReview />
     </div>

@@ -48,13 +48,14 @@ const PostReview = ({ spot, user }) => {
           {serverError && <p className="server-error">{serverError}</p>}
 
           <textarea
+            className="review-textarea"
             placeholder="Leave your review here..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
 
           <div className="stars-container">
-            <div className="star-icons">
+            <div className="star-icons-rating">
               {[1, 2, 3, 4, 5].map((rating) => (
                 <div
                   key={rating}
