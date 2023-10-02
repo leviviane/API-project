@@ -14,8 +14,8 @@ export const CreateSpotForm = () => {
   const [state, setState] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [previewImg, setPreviewImg] = useState("");
+  const [price, setprice] = useState("");
+  const [previewImg, setpreviewImg] = useState("");
   const [imgOne, setImgOne] = useState("");
   const [imgTwo, setImgTwo] = useState("");
   const [imgThree, setImgThree] = useState("");
@@ -43,8 +43,8 @@ export const CreateSpotForm = () => {
     if (!state) errors.state = "State is required";
     if (description.length < 30) errors.description = "Description needs 30 or more characters";
     if (!name) errors.name = "Name is required";
-    if (!price) errors.price = "Price is required";
-    if (!previewImg) errors.previewImg = "Preview image is required";
+    if (!price) errors.price = "price is required";
+    if (!previewImg) errors.previewImg = "preview image is required";
     if (previewImg && !previewImg.endsWith("jpg") && !previewImg.endsWith("jpeg") && !previewImg.endsWith("png")) errors.previewImg = "Image URL must end in .png, .jpg, or .jpeg";
     if (imgOne && !imgOne.endsWith("jpg") && !imgOne.endsWith("jpeg") && !imgOne.endsWith("png")) errors.imgOne = "Image URL must end in .png, .jpg, or .jpeg";
     if (imgTwo && !imgTwo.endsWith("jpg") && !imgTwo.endsWith("jpeg") && !imgTwo.endsWith("png")) errors.imgTwo = "Image URL must end in .png, .jpg, or .jpeg";
@@ -74,55 +74,48 @@ export const CreateSpotForm = () => {
     );
 
     if (Object.keys(errorsFound).length === 0) {
+      const payload = {
+        country,
+        address,
+        city,
+        state,
+        description,
+        name,
+        price,
+        previewImg,
+        imgOne,
+        imgTwo,
+        imgThree,
+        imgFour,
+        lat: 1,
+        lng: 1
+      };
 
-      // try {
-        const payload = {
-          country,
-          address,
-          city,
-          state,
-          description,
-          name,
-          price,
-          previewImg,
-          imgOne,
-          imgTwo,
-          imgThree,
-          imgFour,
-          lat: 1,
-          lng: 1
-        };
+      const newSpot = await dispatch(createSpotThunk(payload));
+      await dispatch(addSpotImageThunk(newSpot.id, previewImg, true));
+      await dispatch(addSpotImageThunk(newSpot.id, imgOne, false));
+      await dispatch(addSpotImageThunk(newSpot.id, imgTwo, false));
+      await dispatch(addSpotImageThunk(newSpot.id, imgThree, false));
+      await dispatch(addSpotImageThunk(newSpot.id, imgFour, false));
 
-        const newSpot = await dispatch(createSpotThunk(payload));
-        await dispatch(addSpotImageThunk(newSpot.id, previewImg, true));
-        await dispatch(addSpotImageThunk(newSpot.id, imgOne, false));
-        await dispatch(addSpotImageThunk(newSpot.id, imgTwo, false));
-        await dispatch(addSpotImageThunk(newSpot.id, imgThree, false));
-        await dispatch(addSpotImageThunk(newSpot.id, imgFour, false));
-
-        if (newSpot) {
-          dispatch(getSingleSpotThunk(newSpot.id));
-          history.push(`/spot/${newSpot.id}`);
-        }
-      // } catch (error) {
-      //   console.error("ERROR:", error);
-
-      // }
+      if (newSpot) {
+        dispatch(getSingleSpotThunk(newSpot.id));
+        history.push(`/spot/${newSpot.id}`);
+      }
     }
   };
 
   return (
     <>
-      <div>
+      <div className='form-container'>
         <h1>Create a new Spot</h1>
-        <h2>Where's your place located?</h2>
-        <h4>
-          Guests will only get your exact address once they booked a
-          reservation.
-        </h4>
+        <div>
+          <h2>Where's your place located?</h2>
+          <h4>Guests will only get your exact address once they booked a reservation.</h4>
+        </div>
       </div>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='elements-filled'>
           <label>
             Country
             <input
@@ -132,7 +125,7 @@ export const CreateSpotForm = () => {
               placeholder="Country"
             />
           </label>
-          {errors.country && <p>{errors.country}</p>}
+          {errors.country && <p className='errors'>{errors.country}</p>}
           <label>
             Street Address
             <input
@@ -142,9 +135,9 @@ export const CreateSpotForm = () => {
               placeholder="Address"
             />
           </label>
-          {errors.address && <p>{errors.address}</p>}
+          {errors.address && <p className='errors'>{errors.address}</p>}
         </div>
-        <div>
+        <div className='elements-filled-2'>
           <label>
             City
             <input
@@ -154,7 +147,7 @@ export const CreateSpotForm = () => {
               placeholder="City"
             />
           </label>
-          {errors.city && <p>{errors.city}</p>}
+          {errors.city && <p className='errors'>{errors.city}</p>}
           <label>
             State
             <input
@@ -164,28 +157,25 @@ export const CreateSpotForm = () => {
               placeholder="State"
             />
           </label>
-          {errors.state && <p>{errors.state}</p>}
+          {errors.state && <p className='errors'>{errors.state}</p>}
         </div>
-        <div>
+        <div className='elements-filled-3'>
           <h2>Describe your place to guests</h2>
           <h4>
-            Mention the best features of your space, any special amenities
-            like fast wifi or parking, and what you love about the
-            neighborhood
+            Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood
           </h4>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Please write at least 30 characters"
+            placeholder="please write at least 30 characters"
             rows="5"
           ></textarea>
-          {errors.description && <p>{errors.description}</p>}
+          {errors.description && <p className='errors'>{errors.description}</p>}
         </div>
-        <div>
+        <div className='elements-filled-4'>
           <h2>Create a title for your spot</h2>
           <label>
-            Catch guests' attention with a spot title that highlights what
-            makes your place special.
+            Catch guests' attention with a spot title that highlights what makes your place special.
             <input
               type="text"
               value={name}
@@ -193,69 +183,65 @@ export const CreateSpotForm = () => {
               placeholder="Name of your spot"
             />
           </label>
-          {errors.name && <p>{errors.name}</p>}
+          {errors.name && <p className='errors'>{errors.name}</p>}
         </div>
-        <div>
+        <div className='elements-filled-5'>
           <h2>Set a base price for your spot</h2>
-          <h4>
-            Competitive pricing can help your listing stand out and rank
-            higher in search results.
-          </h4>
-          <div>
-            <label>
-              $
-              <input
-                type="number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                placeholder="Price per night (USD)"
-              />
-            </label>
-            {errors.price && <p>{errors.price}</p>}
+          <h4>Competitive pricing can help your listing stand out and rank higher in search results.</h4>
+          <div className="price-input">
+            <span className="dollar-sign">$</span>
+            <input
+            type="number"
+            value={price}
+            onChange={(e) => setprice(e.target.value)}
+            placeholder="price per night (USD)" />
+            </div>
+            {errors.price && <p className='errors'>{errors.price}</p>}
           </div>
-        </div>
-        <div>
+        <div className='elements-filled-6'>
           <h2>Liven up your spot with photos</h2>
           <label>
             Submit a link to at least one photo to publish your spot.
             <input
               type="url"
               value={previewImg}
-              onChange={(e) => setPreviewImg(e.target.value)}
-              placeholder="Preview Image URL"
+              onChange={(e) => setpreviewImg(e.target.value)}
+              placeholder="preview Image URL"
             />
           </label>
-          {errors.previewImg && <p>{errors.previewImg}</p>}
+          {errors.previewImg && <p className='errors'>{errors.previewImg}</p>}
           <input
             type="url"
             value={imgOne}
             onChange={(e) => setImgOne(e.target.value)}
             placeholder="Image URL"
           />
-          {errors.imgOne && <p>{errors.imgOne}</p>}
+          {errors.imgOne && <p className='errors'>{errors.imgOne}</p>}
           <input
             type="url"
             value={imgTwo}
             onChange={(e) => setImgTwo(e.target.value)}
             placeholder="Image URL"
           />
-          {errors.imgTwo && <p>{errors.imgTwo}</p>}
+          {errors.imgTwo && <p className='errors'>{errors.imgTwo}</p>}
           <input
             type="url"
             value={imgThree}
             onChange={(e) => setImgThree(e.target.value)}
             placeholder="Image URL"
           />
-          {errors.imgThree && <p>{errors.imgThree}</p>}
+          {errors.imgThree && <p className='errors'>{errors.imgThree}</p>}
           <input
             type="url"
             value={imgFour}
             onChange={(e) => setImgFour(e.target.value)}
             placeholder="Image URL"
           />
-          {errors.imgFour && <p>{errors.imgFour}</p>}
+          {errors.imgFour && <p className='errors'>{errors.imgFour}</p>}
         </div>
+        <div className='elements-filled-7'>
         <button type="submit">Create spot</button>
+        </div>
       </form>
     </>
   );

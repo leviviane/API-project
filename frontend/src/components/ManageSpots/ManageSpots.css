@@ -1,0 +1,32 @@
+.spot-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 40px;
+}
+
+.spot-list .spot-manage {
+    width: 200px;
+    margin: 10px;
+}
+
+.spot-list .image-box {
+    width: 200px;
+    height: 150px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.update-button-container button.manage-update-button {
+    margin-right: 10px;
+  }
+
+.spot-manage .update-spot p {
+    display: inline-block;
+    margin-right: 26px;
+}
+
+.spot-manage .ratings-container {
+  display: inline-block;
+  margin-right: 26px;
+}
