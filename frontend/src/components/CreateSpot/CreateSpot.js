@@ -75,7 +75,7 @@ export const CreateSpotForm = () => {
 
     if (Object.keys(errorsFound).length === 0) {
 
-      try {
+      // try {
         const payload = {
           country,
           address,
@@ -88,7 +88,9 @@ export const CreateSpotForm = () => {
           imgOne,
           imgTwo,
           imgThree,
-          imgFour
+          imgFour,
+          lat: 1,
+          lng: 1
         };
 
         const newSpot = await dispatch(createSpotThunk(payload));
@@ -100,12 +102,12 @@ export const CreateSpotForm = () => {
 
         if (newSpot) {
           dispatch(getSingleSpotThunk(newSpot.id));
-          history.push(`/spots/${newSpot.id}`);
+          history.push(`/spot/${newSpot.id}`);
         }
-      } catch (error) {
-        console.error("ERROR:", error);
+      // } catch (error) {
+      //   console.error("ERROR:", error);
 
-      }
+      // }
     }
   };
 

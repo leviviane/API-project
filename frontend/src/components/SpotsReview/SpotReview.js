@@ -20,7 +20,7 @@ export const SpotReview = () => {
 ;
     useEffect(() => {
         dispatch(getReviewsThunk(spotId)).then(() => setIsLoaded(true))
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId, reviews]);
 
     // if (!reviews[spots]) {
     //     return null;
@@ -28,9 +28,14 @@ export const SpotReview = () => {
 
     // const listOfReviews = Object.values(reviews.Reviews).reverse()
     const listOfReviews = reviews
+    if (!listOfReviews) {
+      return null;
+    }
     //organizing reviews in descending order
 
-    const previousReviews = user && listOfReviews.find((review) => review.userId === user.id);
+    const listOfReviewsArray = Object.values(listOfReviews);
+    const previousReviews = user && listOfReviewsArray.find((review) => review.userId === user.id);
+
 
     const { avgStarRating, numReviews } = spot;
 
@@ -82,7 +87,7 @@ export const SpotReview = () => {
                 {listOfReviews.map((review) => (
                   <div key={review.id}>
                     <div className="review-container">
-                      <h3 className="user-name">{review.User.firstName}</h3>
+                      <h3 className="user-name">{review?.User?.firstName}</h3>
                       <h4 className="review-date">
                         {createDate(review.createdAt)}
                       </h4>

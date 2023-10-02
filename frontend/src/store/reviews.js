@@ -1,95 +1,102 @@
 import { csrfFetch } from "./csrf";
 
-const GET_ALL_REVIEWS = 'reviews/GET_ALL_REVIEWS';
-const CREATE_REVIEW = '/reviews/CREATE_REVIEW';
-const DELETE_REVIEW = '/reviews/DELETE_REVIEW';
+const GET_ALL_REVIEWS = "reviews/GET_ALL_REVIEWS";
+const ADD_REVIEW = "review/ADD_REVIEW";
+const DELETE_REVIEW = "review/DELETE_REVIEW";
 
-//ACTION CREATORS
+//action creator
 //get all reviews
-const getAllReviews = (reviews) => ({
+const getAllReviews = (reviews) => {
+  return {
     type: GET_ALL_REVIEWS,
-    reviews
-});
+    reviews,
+  };
+};
 
-//create a review
-const createReview = (review) => ({
-    type: CREATE_REVIEW,
-    review
-});
+//post a review
+const addReview = (review) => {
+  return {
+    type: ADD_REVIEW,
+    review,
+  };
+};
 
-//delete a review
-const deleteReview = (reviewId) => ({
+//delete review
+const deleteReview = (reviewId) => {
+  return {
     type: DELETE_REVIEW,
-    reviewId
-})
-
+    reviewId,
+  };
+};
 
 //THUNKS
-//get reviews
+//get review
 export const getReviewsThunk = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
 
   if (res.ok) {
-    const data = await res.json();
-    dispatch(getAllReviews(data));
-    return res;
+    const reviews = await res.json();
+    dispatch(getAllReviews(reviews));
+    return reviews;
   }
 };
 
-//create a review
-export const createReviewThunk = (spotId, review, stars, user) => async(dispatch) => {
-    const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
+//post a review
+export const addReviewThunk = (review, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST",
+    body: JSON.stringify(review),
+  });
 
-    if (res.ok) {
-        const data = await res.json();
-        dispatch(createReview(data))
-        return res;
-    }
+  if (res.ok) {
+    const newReview = await res.json();
+    dispatch(addReview(newReview));
+    return newReview;
+  }
 };
 
 //delete a review
-export const deleteReviewThunk = (reviewId) => async(dispatch) => {
-    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
-        method: 'DELETE'
-    })
+export const deleteReviewThunk = (reviewId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE",
+  });
 
-    if (res.ok) {
-        const data = await res.json();
-        dispatch(deleteReview(reviewId))
-        return data;
-    }
+  if (res.ok) {
+    dispatch(deleteReview(reviewId));
+  }
 };
 
 const initialState = {
-    spot: {},
-    user: {}
-}
+  spot: {},
+  user: {},
+};
 
 const reviewsReducer = (state = initialState, action) => {
-    let newState;
-    switch(action.type) {
-        case GET_ALL_REVIEWS:
-            return {
-                ...state,
-                spot: action.reviews
-            }
-            // newState = { ...state, allReviews: {} };
-            // action.reviews.Reviews.forEach((review) => {
-            //     newState.reviews[review.id] = review;
-            // });
-            return newState;
-        case CREATE_REVIEW:
-            newState = { ...state, reviews: { ...state.reviews }}
-            newState.reviews[action.review.id] = action.review
-            return newState;
-        case DELETE_REVIEW:
-            newState = { ...state, reviews: { ...state.reviews}}
-            delete newState.reviews[action.reviewId]
-            return newState;
-
-        default:
-            return state;
+    switch (action.type) {
+      case GET_ALL_REVIEWS:
+        return { ...state, spot: action.reviews };
+      case ADD_REVIEW:
+        return {
+          ...state,
+          spot: {
+            ...state.spot,
+            Reviews: [...state.spot.Reviews, action.review],
+          },
+        };
+      case DELETE_REVIEW:
+        const updatedReviews = state.spot.Reviews.filter(
+          (review) => review.id !== action.reviewId
+        );
+        return {
+          ...state,
+          spot: {
+            ...state.spot,
+            Reviews: updatedReviews,
+          },
+        };
+      default:
+        return state;
     }
-}
+  };
 
-export default reviewsReducer;
+  export default reviewsReducer;
