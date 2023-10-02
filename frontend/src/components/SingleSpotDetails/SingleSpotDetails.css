@@ -122,6 +122,7 @@
 .ratings-container span {
   font-size: 14px;
   margin: 0;
+  display: inline-block;
 }
 
 
