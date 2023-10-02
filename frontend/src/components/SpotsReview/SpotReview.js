@@ -20,7 +20,7 @@ export const SpotReview = () => {
 ;
     useEffect(() => {
         dispatch(getReviewsThunk(spotId)).then(() => setIsLoaded(true))
-    }, [dispatch, spotId]);
+    }, [dispatch, spotId, reviews]);
 
     // if (!reviews[spots]) {
     //     return null;

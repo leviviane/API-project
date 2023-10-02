@@ -1,57 +1,21 @@
-// import { useDispatch } from 'react-redux';
-// import { useModal } from "../../context/Modal";
-// import { getSingleSpotThunk } from '../../stores/spots';
-// import { deleteReviewThunk } from '../../stores/reviews';
-
-// export const DeleteReview = ({reviewId, spotId}) => {
-//     const dispatch = useDispatch();
-//     const {closeModal } = useModal();
-
-//     const handleDelete = (e) => {
-//         e.preventDefault();
-
-//         dispatch(deleteReviewThunk(reviewId, spotId))
-//         .then (()=> dispatch(getSingleSpotThunk(spotId)))
-//         .then(closeModal);
-//     }
-
-//     return (
-//         <div className='delete-container'>
-//             <h3>Confirm Delete</h3>
-//             <p>Are you sure you want to remove this review?</p>
-//             <div className='confirm-buttons'>
-//                 <button
-//                 id='yes-button'
-//                 onClick={handleDelete}>
-//                     Yes (Delete Review)
-//                 </button>
-//                 <button
-//                 id='no-button'
-//                 onClick={handleDelete}>
-//                     No (Keep Review)
-//                 </button>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default DeleteReview;
-
 import { useDispatch } from 'react-redux';
+// import { useParams } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
 import { deleteReviewThunk } from '../../store/reviews';
+// import { getSingleSpotThunk } from '../../store/spots';
 import './DeleteReview';
 
-
 function DeleteReviewModal({ reviewId }) {
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
+    // const { spotId } = useParams();
     const { closeModal } = useModal();
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
-        dispatch(deleteReviewThunk(reviewId))
-        closeModal();
+        await dispatch(deleteReviewThunk(reviewId)).then(closeModal);
+        // await dispatch(getReviewsThunk(spotId));
+        // await dispatch(getSingleSpotThunk(spotId));
+        // closeModal();
     }
 
     const noDelete = (e) => {
@@ -80,3 +44,55 @@ function DeleteReviewModal({ reviewId }) {
 };
 
 export default DeleteReviewModal;
+
+
+
+// import { useDispatch } from 'react-redux';
+// import { useParams } from 'react-router-dom/';
+// import { useModal } from '../../context/Modal';
+// import { deleteReviewThunk } from '../../store/reviews';
+// import { getReviewsThunk } from '../../store/reviews';
+// import { getSingleSpotThunk} from '../../store/spots';
+// import './DeleteReview';
+
+
+// function DeleteReviewModal({ reviewId }) {
+//     const dispatch = useDispatch();
+//     const { spotId } = useParams();
+//     const { closeModal } = useModal();
+
+//     const handleDelete = (e) => {
+//         e.preventDefault();
+//         dispatch(deleteReviewThunk(reviewId))
+//         closeModal();
+//     }
+
+//     const noDelete = (e) => {
+//         e.preventDefault();
+//         closeModal();
+//     }
+
+//     dispatch(getReviewsThunk(spotId))
+//     dispatch(getSingleSpotThunk(spotId))
+
+//     return (
+//         <div className='delete-container'>
+//             <h3>Confirm Delete</h3>
+//             <p>Are you sure you want to remove this review?</p>
+//             <div className='confirm-buttons'>
+//                 <button
+//                 id='yes-button'
+//                 onClick={handleDelete}>
+//                     Yes (Delete Review)
+//                 </button>
+//                 <button
+//                 id='no-button'
+//                 onClick={noDelete}>
+//                     No (Keep Review)
+//                 </button>
+//             </div>
+//         </div>
+//     )
+// };
+
+// export default DeleteReviewModal;
