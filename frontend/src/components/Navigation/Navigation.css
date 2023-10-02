@@ -99,20 +99,20 @@
   list-style-type: none;
 }
 
-
-
-/* ul li:hover .profile-dropdown {
-  display: block;
+.manage-line {
+  text-decoration: none;
 }
 
-.profile-dropdown {
-  position: absolute;
-  top: 100%;
-  right: 0;
+.profile-dropdown button.logout-button {
+  border: 1px solid #a19ef0;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
   background-color: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  width: 80px;
-  display: none;
-} */
+  color: #a19ef0;
+}
+
+.profile-dropdown button.logout-button:hover {
+  background-color: #a19ef0;
+  color: white;
+}
