@@ -46,7 +46,7 @@ module.exports = {
         name: 'Cafe Layered',
         description: 'A London inspired cafe with delicious coffee, tea, and pastries',
         price: 1000
-      }
+      },
     ])
     /**
      * Add seed commands here.

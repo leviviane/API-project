@@ -14,78 +14,78 @@ module.exports = {
       {
         spotId: 1,
         preview: true,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550354936070294/cafe-onion-main.jpeg'
+        url: 'https://i.imgur.com/iTSORnx.jpg'
       },
       {
         spotId: 1,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154915610153721947/onion-one.jpeg'
+        url: 'https://i.imgur.com/hpEIepq.jpg'
       },
       {
         spotId: 1,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154916016296562768/onion-four.jpeg'
+        url: 'https://i.imgur.com/TyIWtSv.jpg'
       },
       {
         spotId: 1,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154915953759498280/onion-two.jpeg'
+        url: 'https://i.imgur.com/6TiwOT2.jpg'
       },
       {
         spotId: 1,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154916038543151136/onion-five.jpeg'
+        url: 'https://i.imgur.com/YHadFYe.jpg'
       },
       {
         spotId: 2,
         preview: true,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154926764334784512/layered-main.jpeg'
+        url: 'https://i.imgur.com/PYNyNsI.png'
       },
       {
         spotId: 2,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925709601542195/knotted-two.jpeg'
+        url: 'https://i.imgur.com/K0ChQm3.png'
       },
       {
         spotId: 2,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925738319958098/knotted-three.jpeg'
+        url: 'https://i.imgur.com/HF3RrTt.png'
       },
       {
         spotId: 2,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925757286584320/knotted-four.jpeg'
+        url: 'https://i.imgur.com/nQTUkSc.png'
       },
       {
         spotId: 2,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154925774864920728/knotted-five.jpeg'
+        url: 'https://i.imgur.com/gr7xV0S.png'
       },
       {
         spotId: 3,
         preview: true,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154550403430629396/layered-main.jpeg',
+        url: 'https://i.imgur.com/kCwuTVs.jpeg'
       },
       {
         spotId: 3,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917581363351603/layered-two.jpeg'
+        url: 'https://i.imgur.com/RO3bE6t.jpeg'
       },
       {
         spotId: 3,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917595867259121/layered-three.jpeg'
+        url: 'https://i.imgur.com/87ZVfxb.jpeg'
       },
       {
         spotId: 3,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917620395557005/layered-four.jpeg'
+        url: 'https://i.imgur.com/Usgm9tL.jpeg'
       },
       {
         spotId: 3,
         preview: false,
-        url: 'https://cdn.discordapp.com/attachments/1154550284698263596/1154917642738597898/layered-five.jpeg'
-      }
+        url: 'https://i.imgur.com/E33aaRC.jpeg'
+      },
     ])
     /**
 
