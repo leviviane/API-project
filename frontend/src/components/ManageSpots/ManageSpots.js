@@ -18,7 +18,7 @@ function ManageSpots() {
   }, [dispatch, userId]);
 
   const newSpot = () => {
-    history.push('/spots/new');
+    history.push('/spots/create');
   };
 
   return (

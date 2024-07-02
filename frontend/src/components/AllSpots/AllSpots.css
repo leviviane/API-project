@@ -9,7 +9,7 @@
 .spot {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align all content to the left */
+  align-items: flex-start;
   margin-bottom: 20px;
 }
 

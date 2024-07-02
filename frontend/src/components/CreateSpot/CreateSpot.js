@@ -14,8 +14,8 @@ export const CreateSpotForm = () => {
   const [state, setState] = useState("");
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
-  const [price, setprice] = useState("");
-  const [previewImg, setpreviewImg] = useState("");
+  const [price, setPrice] = useState("");
+  const [previewImg, setPreviewImg] = useState("");
   const [imgOne, setImgOne] = useState("");
   const [imgTwo, setImgTwo] = useState("");
   const [imgThree, setImgThree] = useState("");
@@ -193,7 +193,7 @@ export const CreateSpotForm = () => {
             <input
             type="number"
             value={price}
-            onChange={(e) => setprice(e.target.value)}
+            onChange={(e) => setPrice(e.target.value)}
             placeholder="price per night (USD)" />
             </div>
             {errors.price && <p className='errors'>{errors.price}</p>}
@@ -205,7 +205,7 @@ export const CreateSpotForm = () => {
             <input
               type="url"
               value={previewImg}
-              onChange={(e) => setpreviewImg(e.target.value)}
+              onChange={(e) => setPreviewImg(e.target.value)}
               placeholder="preview Image URL"
             />
           </label>
